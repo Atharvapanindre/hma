@@ -1,0 +1,92 @@
+import 'dart:io'; 
+import 'dart:math'; 
+double areaParallelogram(double base, double height) { 
+return base * height; 
+} 
+double perimeterTriangle(double a, double b, double c) { 
+return a + b + c; 
+} 
+double areaCircle(double radius) { 
+return pi * radius * radius; 
+} 
+double areaRegularHexagon(double side) { 
+return (3 * sqrt(3) / 2) * side * side; 
+} 
+double areaRectangle(double length, double breadth) { 
+return length * breadth; 
+} 
+double areaTrapezium(double a, double b, double height) { 
+return 0.5 * (a + b) * height; 
+} 
+double areaRhombus(double d1, double d2) { 
+return 0.5 * d1 * d2; 
+} 
+void main() { 
+while (true) { 
+print("\n Geometric Functions "); 
+print("1. Area of Parallelogram"); 
+print("2. Perimeter of Triangle"); 
+print("3. Area of Circle"); 
+print("4. Area of Regular Hexagon"); 
+print("5. Area of Rectangle"); 
+print("6. Area of Trapezium"); 
+print("7. Area of Rhombus"); 
+print("8. EXIT"); 
+stdout.write("\nEnter your choice (1–8): "); 
+int choice = int.parse(stdin.readLineSync()!); 
+switch (choice) { 
+case 1: 
+stdout.write("Enter base: "); 
+double base = double.parse(stdin.readLineSync()!); 
+stdout.write("Enter height: "); 
+double height = double.parse(stdin.readLineSync()!); 
+print("Area of Parallelogram = ${areaParallelogram(base, height)}"); 
+break 
+; 
+case 2: 
+stdout.write("Enter side a: "); 
+double a = double.parse(stdin.readLineSync()!); 
+stdout.write("Enter side b: "); 
+double b = double.parse(stdin.readLineSync()!); 
+stdout.write("Enter side c: "); 
+double c = double.parse(stdin.readLineSync()!); 
+print("Perimeter of Triangle = ${perimeterTriangle(a, b, c)}"); 
+break; 
+case 3: 
+stdout.write("Enter radius: "); 
+double radius = double.parse(stdin.readLineSync()!); 
+print("Area of Circle = ${areaCircle(radius)}"); 
+break; 
+case 4: 
+stdout.write("Enter side of hexagon: "); 
+double side = double.parse(stdin.readLineSync()!); 
+print("Area of Regular Hexagon = ${areaRegularHexagon(side)}"); 
+break; 
+case 5: 
+stdout.write("Enter length: "); 
+double length = double.parse(stdin.readLineSync()!); 
+stdout.write("Enter breadth: "); 
+double breadth = double.parse(stdin.readLineSync()!); 
+print("Area of Rectangle = ${areaRectangle(length, breadth)}"); 
+break; 
+case 6: 
+stdout.write("Enter side a: "); 
+double s1 = double.parse(stdin.readLineSync()!); 
+stdout.write("Enter side b: "); 
+double s2 = double.parse(stdin.readLineSync()!); 
+stdout.write("Enter height: "); 
+double h = double.parse(stdin.readLineSync()!); 
+print("Area of Trapezium = ${areaTrapezium(s1, s2, h)}"); 
+break; 
+case 7: 
+stdout.write("Enter diagonal 1: "); 
+double d1 = double.parse(stdin.readLineSync()!); 
+stdout.write("Enter diagonal 2: "); 
+double d2 = double.parse(stdin.readLineSync()!); 
+print("Area of Rhombus = ${areaRhombus(d1, d2)}");  
+break; 
+default: 
+print("Invalid choice! Please select between 1–8."); 
+} 
+} 
+} 
