@@ -1,0 +1,54 @@
+import 'package:flutter/material.dart'; 
+void main() { 
+runApp(MyApp()); 
+} 
+class MyApp extends StatelessWidget { 
+@override 
+Widget build(BuildContext context) { 
+return MaterialApp( 
+debugShowCheckedModeBanner: false, 
+home: HomeScreen(), 
+); 
+} 
+} 
+// ---------- HOME SCREEN ---------- 
+class HomeScreen extends StatelessWidget { 
+@override 
+Widget build(BuildContext context) { 
+return Scaffold( 
+appBar: AppBar(title: Text('Home Screen')), 
+body: Center( 
+child: ElevatedButton( 
+child: Text('Send Data'), 
+onPressed: () { 
+Navigator.push( 
+context, 
+MaterialPageRoute( 
+builder: (context) => SecondScreen( 
+message: 'Hello from Home Screen', 
+), 
+), 
+); 
+}, 
+), 
+), 
+); 
+} 
+} 
+// ---------- SECOND SCREEN ---------- 
+class SecondScreen extends StatelessWidget { 
+final String message; 
+SecondScreen({required this.message}); 
+@override 
+Widget build(BuildContext context) { 
+return Scaffold( 
+appBar: AppBar(title: Text('Second Screen')), 
+body: Center( 
+child: Text( 
+message, 
+style: TextStyle(fontSize: 22), 
+), 
+), 
+); 
+} 
+} 
