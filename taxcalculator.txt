@@ -1,0 +1,102 @@
+import 'package:flutter/material.dart'; 
+void main() { 
+runApp(const TaxCalculatorApp()); 
+} 
+class TaxCalculatorApp extends StatelessWidget { 
+const TaxCalculatorApp({super.key}); 
+@override 
+Widget build(BuildContext context) { 
+return MaterialApp( 
+debugShowCheckedModeBanner: false, 
+title: 'Income Tax Calculator', 
+home: const TaxHomePage(), 
+); 
+} 
+} 
+class TaxHomePage extends StatefulWidget { 
+const TaxHomePage({super.key}); 
+@override 
+State<TaxHomePage> createState() => _TaxHomePageState(); 
+} 
+class _TaxHomePageState extends State<TaxHomePage> { 
+final TextEditingController incomeController = TextEditingController(); 
+double oldTax = 0.0; 
+double newTax = 0.0; 
+void calculateTax() { 
+double income = double.tryParse(incomeController.text) ?? 0; 
+setState(() { 
+oldTax = calculateOldRegimeTax(income); 
+newTax = calculateNewRegimeTax(income); 
+}); 
+} 
+double calculateOldRegimeTax(double income) { 
+double tax = 0; 
+if (income > 250000) { 
+tax += (income > 500000 ? 250000 : income - 250000) * 0.05; 
+} 
+if (income > 500000) { 
+tax += (income > 1000000 ? 500000 : income - 500000) * 0.20; 
+} 
+if (income > 1000000) { 
+tax += (income - 1000000) * 0.30; 
+} 
+
+return tax; 
+} 
+double calculateNewRegimeTax(double income) { 
+double tax = 0; 
+if (income > 300000) { 
+tax += (income > 600000 ? 300000 : income - 300000) * 0.05; 
+} 
+if (income > 600000) { 
+tax += (income > 900000 ? 300000 : income - 600000) * 0.10; 
+} 
+if (income > 900000) { 
+tax += (income > 1200000 ? 300000 : income - 900000) * 0.15; 
+} 
+if (income > 1200000) { 
+tax += (income > 1500000 ? 300000 : income - 1200000) * 0.20; 
+} 
+if (income > 1500000) { 
+tax += (income - 1500000) * 0.30; 
+} 
+return tax; 
+} 
+@override 
+Widget build(BuildContext context) { 
+return Scaffold( 
+appBar: AppBar(title: const Text('Income Tax Calculator')), 
+body: Padding( 
+padding: const EdgeInsets.all(20), 
+child: Column( 
+children: [ 
+TextField( 
+controller: incomeController, 
+keyboardType: TextInputType.number, 
+decoration: const InputDecoration( 
+labelText: 'Enter Annual Income (₹)', 
+border: OutlineInputBorder(), 
+), 
+), 
+const SizedBox(height: 20), 
+ElevatedButton( 
+onPressed: calculateTax, 
+child: const Text('Calculate Tax'), 
+), 
+const SizedBox(height: 30), 
+Text( 
+'Old Regime Tax: ₹${oldTax.toStringAsFixed(2)}', 
+style: const TextStyle(fontSize: 18), 
+), 
+const SizedBox(height: 10), 
+Text( 
+'New Regime Tax: ₹${newTax.toStringAsFixed(2)}', 
+style: const TextStyle(fontSize: 18), 
+), 
+
+], 
+), 
+), 
+); 
+} 
+}
