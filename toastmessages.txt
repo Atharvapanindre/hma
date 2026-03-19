@@ -1,0 +1,42 @@
+import 'package:flutter/material.dart'; 
+import 'package:fluttertoast/fluttertoast.dart'; 
+void main() { 
+runApp(const MyApp()); 
+} 
+class MyApp extends StatelessWidget { 
+const MyApp({super.key}); 
+@override 
+Widget build(BuildContext context) { 
+return const MaterialApp( 
+debugShowCheckedModeBanner: false, 
+home: ToastDemo(), 
+); 
+} 
+} 
+class ToastDemo extends StatelessWidget { 
+const ToastDemo({super.key}); 
+void showToast() { 
+Fluttertoast.showToast( 
+msg: "This is a Toast message", 
+toastLength: Toast.LENGTH_SHORT, 
+gravity: ToastGravity.BOTTOM, 
+backgroundColor: Colors.black, 
+textColor: Colors.white, 
+fontSize: 16, 
+); 
+} 
+@override 
+Widget build(BuildContext context) { 
+return Scaffold( 
+appBar: AppBar( 
+title: const Text("Flutter Toast Example"), 
+), 
+body: Center( 
+child: ElevatedButton( 
+onPressed: showToast, 
+child: const Text("Show Toast"), 
+), 
+), 
+); 
+} 
+}
