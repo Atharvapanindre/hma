@@ -1,0 +1,74 @@
+import 'package:flutter/material.dart'; 
+void main() { 
+runApp(MyApp()); 
+} 
+class MyApp extends StatelessWidget { 
+@override 
+Widget build(BuildContext context) { 
+return MaterialApp( 
+debugShowCheckedModeBanner: false, 
+home: FirstScreen(), 
+); 
+} 
+} 
+// ---------- FIRST SCREEN ---------- 
+class FirstScreen extends StatefulWidget { 
+@override 
+_FirstScreenState createState() => _FirstScreenState(); 
+} 
+class _FirstScreenState extends State<FirstScreen> { 
+String number = ''; 
+@override  
+Widget build(BuildContext context) { 
+return Scaffold( 
+appBar: AppBar(title: Text('First Screen')), 
+body: Padding( 
+padding: EdgeInsets.all(16), 
+child: Column( 
+children: [ 
+TextField( 
+keyboardType: TextInputType.number, 
+onChanged: (value) { 
+number = value; 
+}, 
+decoration: InputDecoration( 
+labelText: 'Enter number', 
+border: OutlineInputBorder(), 
+), 
+), 
+SizedBox(height: 20), 
+ElevatedButton( 
+child: Text('Next'), 
+onPressed: () { 
+Navigator.push( 
+context, 
+MaterialPageRoute( 
+builder: (context) => 
+SecondScreen(number: number), 
+), 
+); 
+}, 
+), 
+], 
+), 
+), 
+); 
+} 
+} 
+// ---------- SECOND SCREEN ---------- 
+class SecondScreen extends StatelessWidget { 
+final String number; 
+SecondScreen({required this.number}); 
+@override 
+Widget build(BuildContext context) { 
+return Scaffold( 
+appBar: AppBar(title: Text('Second Screen')), 
+body: Center( 
+child: Text( 
+number, 
+style: TextStyle(fontSize: 24), 
+), 
+), 
+); 
+} 
+}
