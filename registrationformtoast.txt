@@ -1,0 +1,117 @@
+import 'package:flutter/material.dart'; 
+import 'package:fluttertoast/fluttertoast.dart'; 
+void main() { 
+runApp(const MyApp()); 
+} 
+class MyApp extends StatelessWidget { 
+const MyApp({super.key}); 
+@override 
+Widget build(BuildContext context) { 
+return const MaterialApp( 
+debugShowCheckedModeBanner: false, 
+home: RegistrationForm(), 
+); 
+} 
+} 
+class RegistrationForm extends StatefulWidget { 
+const RegistrationForm({super.key}); 
+@override 
+State<RegistrationForm> createState() => _RegistrationFormState(); 
+} 
+class _RegistrationFormState extends State<RegistrationForm> { 
+final _formKey = GlobalKey<FormState>(); 
+String name = ""; 
+String mobile = ""; 
+String city = "Mumbai"; 
+@override 
+Widget build(BuildContext context) { 
+return Scaffold( 
+appBar: AppBar( 
+title: const Text("Registration Form"), 
+), 
+body: Padding( 
+padding: const EdgeInsets.all(16.0), 
+child: Form( 
+key: _formKey, 
+child: Column( 
+children: [ 
+TextFormField( 
+decoration: const InputDecoration( 
+labelText: "Name", 
+border: OutlineInputBorder(), 
+), 
+validator: (value) { 
+if (value == null || value.isEmpty) { 
+return "Enter name"; 
+} 
+return null; 
+}, 
+onSaved: (value) => name = value!, 
+), 
+const SizedBox(height: 15), 
+TextFormField( 
+keyboardType: TextInputType.phone, 
+decoration: const InputDecoration( 
+labelText: "Mobile", 
+border: OutlineInputBorder(), 
+), 
+validator: (value) { 
+if (value == null || value.length != 10) { 
+return "Enter 10-digit mobile number"; 
+} 
+return null; 
+}, 
+onSaved: (value) => mobile = value!, 
+), 
+const SizedBox(height: 15), 
+DropdownButtonFormField<String>( 
+initialValue: city, 
+decoration: const InputDecoration( 
+labelText: "City", 
+border: OutlineInputBorder(), 
+), 
+items: const [ 
+DropdownMenuItem(value: "Mumbai", child: Text("Mumbai")), 
+DropdownMenuItem(value: "Delhi", child: Text("Delhi")), 
+DropdownMenuItem(value: "Bangalore", child: Text("Bangalore")), 
+DropdownMenuItem(value: "Chennai", child: Text("Chennai")), 
+], 
+onChanged: (value) => city = value!, 
+onSaved: (value) => city = value!, 
+), 
+const SizedBox(height: 25), 
+Row( 
+mainAxisAlignment: MainAxisAlignment.spaceEvenly, 
+children: [ 
+ElevatedButton( 
+onPressed: () { 
+if (_formKey.currentState!.validate()) { 
+_formKey.currentState!.save(); 
+Fluttertoast.showToast( 
+msg: "Name: $name\nMobile: $mobile\nCity: $city", 
+toastLength: Toast.LENGTH_LONG, 
+gravity: ToastGravity.CENTER, 
+); 
+} 
+}, 
+child: const Text("Submit"), 
+), 
+ElevatedButton( 
+style: ElevatedButton.styleFrom 
+onPressed: () { 
+_formKey.currentState!.reset(); 
+setState(() { 
+city = "Mumbai"; 
+}); 
+}, 
+child: const Text("Clear"), 
+), 
+], 
+), 
+], 
+), 
+), 
+), 
+); 
+} 
+}
